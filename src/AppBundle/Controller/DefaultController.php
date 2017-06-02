@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Adv;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class DefaultController extends Controller {
 
@@ -88,25 +89,24 @@ class DefaultController extends Controller {
 
     /**
      * @Route("/display/details/{id}", name="app_display_details")
+     * @ParamConverter("adv", class="AppBundle:Adv")
      */
-    public function showDetailsAction($id, Request $request) {
-        $comment = new \AppBundle\Entity\Comment();
-        $adv = new \AppBundle\Entity\Adv();
+    public function showDetailsAction(Adv $adv, Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $adv_repository = $em->getRepository('AppBundle:Adv')->find($id);
-        $comment_repository = $em->getRepository('AppBundle:Comment')->findBy(array('advId' => $id));
-        $form = $this->createForm(\AppBundle\Form\CommentType::class, $comment);
+        $comment_repository = $em->getRepository('AppBundle:Comment')->findBy(['Adv' => $adv]);
+        $form = $this->createForm(\AppBundle\Form\CommentType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setAdvId($id);
-            $em = $this->getDoctrine()->getManager();
+            $comment = $form->getData();
+            $comment->setAdv($adv);
             $em->persist($comment);
             $em->flush();
+            return $this->redirectToRoute('app_display_details',['id' => $adv->getId()]);
         }
 
         return $this->render(
                         'default/displayDetails.html.twig', array(
-                    'advs' => $adv_repository, 'form' => $form->createView(),'comments' => $comment_repository)
+                    'adv' => $adv, 'form' => $form->createView(), 'comments' => $comment_repository)
         );
     }
 

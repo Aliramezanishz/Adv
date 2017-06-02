@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Comment
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\commentRepository")
  */
-class Comment
-{
+class Comment {
+
     /**
      * @var int
      *
@@ -20,15 +21,6 @@ class Comment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="AdvId", type="string", length=255)
-     * @ORM\ManyToOne(targetEntity="Adv", inversedBy="comments")
-     * @ORM\JoinColumn(name="advId", referencedColumnName="id")
-     */
-    private $advId;
 
     /**
      * @var string
@@ -45,39 +37,21 @@ class Comment
      */
     private $comment;
 
+     /**
+     * @ORM\ManyToOne(targetEntity="Adv", inversedBy="comments")
+     * @ORM\JoinColumn(name="adv_id", referencedColumnName="id")
+     */
+    private $Adv;
+    
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set advId
-     *
-     * @param string $advId
-     *
-     * @return Comment
-     */
-    public function setAdvId($advId)
-    {
-        $this->advId = $advId;
-
-        return $this;
-    }
-
-    /**
-     * Get advId
-     *
-     * @return string
-     */
-    public function getAdvId()
-    {
-        return $this->advId;
     }
 
     /**
@@ -127,5 +101,28 @@ class Comment
     {
         return $this->comment;
     }
-}
 
+    /**
+     * Set adv
+     *
+     * @param \AppBundle\Entity\Adv $adv
+     *
+     * @return Comment
+     */
+    public function setAdv(\AppBundle\Entity\Adv $adv = null)
+    {
+        $this->Adv = $adv;
+
+        return $this;
+    }
+
+    /**
+     * Get adv
+     *
+     * @return \AppBundle\Entity\Adv
+     */
+    public function getAdv()
+    {
+        return $this->Adv;
+    }
+}
