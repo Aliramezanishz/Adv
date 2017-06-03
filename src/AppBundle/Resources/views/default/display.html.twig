@@ -1,0 +1,33 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+   
+        <div class="row text-center">
+            {% for adv in advs %}
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <img style="width:500px;height:200px;" class="img-responsive" src="{{ asset('uploads/adv/'~adv.Pic) }}"/> 
+                        <div class="caption">
+                            <h3>نام : {{adv.name}}</h3>
+                            <p> موضوع{{adv.address}}.</p>
+                            <p>
+                                <a href="{{ path('app_display_details' , { id: adv.id } )}}" class="btn btn-default">جزئیات</a>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+
+    {#
+        <div  class="center">
+            {% for adv in advs %}
+    
+                <img class="img-responsive" src="{{ asset('uploads/adv/'~adv.Pic) }}"/> 
+                <a href="{{ path('app_display_details' , { id:adv.id } )}}">{{adv.name}}</a>
+    
+            {%endfor%}
+        </div>#}
+{% endblock %}
+

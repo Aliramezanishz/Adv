@@ -50,12 +50,7 @@ class Adv {
      */
     private $pic;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cat", type="string", length=255)
-     */
-    private $cat;
+
 
     /**
      * @var string
@@ -71,12 +66,7 @@ class Adv {
      */
     private $des;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=255)
-     */
-    private $city;
+  
 
     /**
      * @var string
@@ -89,6 +79,18 @@ class Adv {
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="Adv")
      */
     private $comments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="advs")
+     */
+    private $Location;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="categorie", inversedBy="advs")
+     */
+    private $categorie;
+
+   
 
     /**
      * Constructor
@@ -356,5 +358,53 @@ class Adv {
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set location
+     *
+     * @param \AppBundle\Entity\Location $location
+     *
+     * @return Adv
+     */
+    public function setLocation(\AppBundle\Entity\Location $location = null)
+    {
+        $this->Location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \AppBundle\Entity\Location
+     */
+    public function getLocation()
+    {
+        return $this->Location;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \AppBundle\Entity\categorie $categorie
+     *
+     * @return Adv
+     */
+    public function setCategorie(\AppBundle\Entity\categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \AppBundle\Entity\categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

@@ -6,7 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Adv;
+use AppBundle\Entity\categorie;
+use AppBundle\Entity\Location;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller {
 
@@ -111,38 +114,32 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/display/Categories/{cat}", name="app_display_Categories")
+     * @Route("/display/Categories/{id}", name="app_display_Categories")
+     * @ParamConverter("categorie", class="AppBundle:categorie")
      */
-    public function showCatAction($cat, Request $request) {
-
-
-        $adv = new \AppBundle\Entity\Adv();
-
+    public function showCatAction(categorie $categorie, Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $adv_repository = $em->getRepository('AppBundle:Adv')->findBy(array('cat' => $cat));
-
-
+        $adv_repository = $em->getRepository('AppBundle:Adv')->findBy(['categorie' => $categorie]);
+       
         return $this->render(
                         'default/display.html.twig', array(
                     'advs' => $adv_repository,)
         );
     }
-
+    
     /**
-     * @Route("/display/City/{city}", name="app_display_City")
+     * @Route("/display/location/{id}", name="app_display_Location")
+     * @ParamConverter("Location", class="AppBundle:Location")
      */
-    public function showCityAction($city, Request $request) {
-
-
-        $adv = new \AppBundle\Entity\Adv();
+    public function showLocAction(Location $Location, Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $adv_repository = $em->getRepository('AppBundle:Adv')->findBy(array('city' => $city));
-
-
+        $adv_repository = $em->getRepository('AppBundle:Adv')->findBy(['Location' => $Location]);
+       
         return $this->render(
                         'default/display.html.twig', array(
                     'advs' => $adv_repository,)
         );
     }
 
+   
 }

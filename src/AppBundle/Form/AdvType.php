@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class AdvType extends AbstractType {
 
@@ -18,20 +19,18 @@ class AdvType extends AbstractType {
                 ->add('name')
                 ->add('email')
                 ->add('tel')
-                ->add('cat', ChoiceType::class, array(
-                    'choices' => array(
-                        'مسکن' => 'home',
-                        'خودرو' => 'car',
-                    ),
-                ))
+              ->add('Location', null, ['choice_label' => function( $Location) {
+                        return $Location->getLoc();
+                    }
+                        ]
+                )
                 ->add('sub')
                 ->add('des')
-                ->add('city', ChoiceType::class, array(
-                    'choices' => array(
-                        'شیراز' => 'shiraz',
-                        'تهران' => 'tehran',
-                    ),
-                ))
+                ->add('categorie', null, ['choice_label' => function( $categorie) {
+                        return $categorie->getCat();
+                    }
+                        ]
+                )
                 ->add('address')
                 ->add('pic', FileType::class, array('label' => 'picture (jpg file)'))
                 ->add('save', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, array('attr' => array('class' => 'save')));

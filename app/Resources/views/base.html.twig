@@ -28,34 +28,33 @@
 
 
         {#************************************************#}
-
-
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">دیوارچه</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ path('app_display')}}">همه آگهی ها</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">دسته بندی<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('app_display_Categories' , { cat:'car' } )}}">خودرو</a></li>
-                            <li><a href="{{ path('app_display_Categories' , { cat:'home' } )}}">مسکن</a></li>
-
+        {{ render(controller('AppBundle:Menu:categorie')) }}
+        {#
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">دیوارچه</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{{ path('app_display')}}">همه آگهی ها</a></li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">دسته بندی<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  
+        
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">مکان<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('app_display_City' , { city:'shiraz' } )}}">شیراز</a></li>
+                                    <li><a href="{{ path('app_display_City' , { city:'tehran' } )}}">تهران</a></li>
+        
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">مکان<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('app_display_City' , { city:'shiraz' } )}}">شیراز</a></li>
-                            <li><a href="{{ path('app_display_City' , { city:'tehran' } )}}">تهران</a></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-
+                    </div>
+                </nav>
+        
+        #}
         {# *************************************************#}
 
 
@@ -63,12 +62,12 @@
 
         <div class="container">
             <header class="jumbotron hero-spacer">
-                
-                     <h1> به دیوارچه خوش آمدید!</h1>
-                    <p>در دیوار کاربران مستقیماً با هم تماس می‌گیرند و هیچ واسطه‌ای در این میان وجود ندارد، پس دقت فرمایید که در خرید و فروشِ شما دیوار هیچ دخالتی ندارد و کاربران باید خودشان جنبه‌های مختلف امنیتی را در نظر بگیرند</p>
-                    <p><a href="{{ path('new')}}" class="btn btn-primary btn-large">آگهی شما</a>
-                    </p>
-              
+
+                <h1> به دیوارچه خوش آمدید!</h1>
+                <p>در دیوار کاربران مستقیماً با هم تماس می‌گیرند و هیچ واسطه‌ای در این میان وجود ندارد، پس دقت فرمایید که در خرید و فروشِ شما دیوار هیچ دخالتی ندارد و کاربران باید خودشان جنبه‌های مختلف امنیتی را در نظر بگیرند</p>
+                <p><a href="{{ path('new')}}" class="btn btn-primary btn-large">آگهی شما</a>
+                </p>
+
             </header>
 
 

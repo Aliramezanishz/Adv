@@ -1,0 +1,31 @@
+
+    
+
+        {% block menu %}
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">دیوارچه</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{{ path('app_display')}}">همه آگهی ها</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">دسته بندی<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('new', {id: categorie.id}) }}">{{ new.cat }}</a></li>
+                                <li><a href="{{ path('app_display_Categories' , { cat:'home' } )}}">مسکن</a></li>
+
+                            </ul>
+                        </li>
+                        {#  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">مکان<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="{{ path('app_display_City' , { city:'shiraz' } )}}">شیراز</a></li>
+                                  <li><a href="{{ path('app_display_City' , { city:'tehran' } )}}">تهران</a></li>
+      
+                              </ul>
+                          </li>#}
+                    </ul>
+                </div>
+            </nav>
+        {%endblock%}
+
+      
